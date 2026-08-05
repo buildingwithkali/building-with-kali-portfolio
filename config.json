@@ -1,0 +1,77 @@
+{
+  "_comment": "👋 THIS IS THE ONLY FILE YOU NEED TO EDIT. Add your holdings, set your goal, save, refresh the page. Live prices come from Yahoo Finance automatically — no API key, no login, no server. Your numbers never leave your machine.",
+
+  "dashboardTitle": "MY PORTFOLIO",
+  "tagline": "// SWEEP THE GAINS · FEED THE MACHINE · BUILD IN PUBLIC",
+  "ownerName": "You",
+
+  "goal": {
+    "label": "North Star",
+    "milestone": 25000,
+    "cash": 500.00,
+    "note": "Set this to whatever number you're chasing. The bar fills automatically from your live position values + cash."
+  },
+
+  "strategy": {
+    "core": "VOO",
+    "philosophy": "Pick a boring core (an index fund) as the compounding engine, then run small 'play' slices for fun. Sweep gains back into the core."
+  },
+
+  "positions": [
+    {
+      "ticker": "VOO",
+      "name": "Vanguard S&P 500 ETF",
+      "type": "core",
+      "shares": 8,
+      "costBasis": 505.00,
+      "note": "The core engine — the boring compounding machine. Sweep destination."
+    },
+    {
+      "ticker": "AAPL",
+      "name": "Apple Inc.",
+      "type": "play",
+      "shares": 10,
+      "costBasis": 210.00
+    },
+    {
+      "ticker": "MSFT",
+      "name": "Microsoft",
+      "type": "play",
+      "shares": 4,
+      "costBasis": 430.00
+    },
+    {
+      "ticker": "NVDA",
+      "name": "NVIDIA",
+      "type": "play",
+      "shares": 6,
+      "costBasis": 120.00,
+      "note": "Example winner — a play position that ran."
+    },
+    {
+      "ticker": "KO",
+      "name": "Coca-Cola",
+      "type": "play",
+      "shares": 15,
+      "costBasis": 62.00,
+      "note": "Example dividend name.",
+      "alert": {
+        "watch": true,
+        "sellTrigger1": 75.00,
+        "sellTrigger1Note": "sweep some gains",
+        "sellTrigger2": 85.00,
+        "sellTrigger2Note": "trim harder"
+      }
+    },
+    {
+      "ticker": "HOOD",
+      "name": "Robinhood Markets",
+      "type": "play",
+      "shares": 5,
+      "costBasis": 55.00,
+      "note": "Example higher-beta play."
+    }
+  ],
+
+  "footerNote": "Live prices via Yahoo Finance · This is a demo config — edit config.json to make it yours · Built with Kali 🐾"
+}

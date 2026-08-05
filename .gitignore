@@ -1,0 +1,12 @@
+# Local Python cruft
+__pycache__/
+*.pyc
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Your PRIVATE holdings — if you copy config.json to a private file, keep it out of git.
+# (config.json itself IS tracked because it ships demo data; delete these lines if you
+#  want to keep YOUR edited config.json private in a fork.)
+config.local.json

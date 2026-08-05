@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Portfolio 🚀 · Built with Kali</title>
+<style>
+  :root {
+    --bg: #07060f;
+    --bg2: #0d0a1f;
+    --surface: #14102b;
+    --surface2: #1b1340;
+    --border: #2e2356;
+    --text: #e8e6ff;
+    --text-dim: #8b86b8;
+    --orange: #ff7a18;
+    --orange-glow: rgba(255, 122, 24, 0.5);
+    --magenta: #ff2bd6;
+    --magenta-glow: rgba(255, 43, 214, 0.5);
+    --teal: #19e3d6;
+    --teal-glow: rgba(25, 227, 214, 0.5);
+    --green: #19e36a;
+    --red: #ff3b6b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    font-family: 'SF Mono', ui-monospace, 'Segoe UI Mono', monospace, system-ui;
+    background:
+      radial-gradient(ellipse 80% 50% at 15% 0%, rgba(255,43,214,0.10), transparent 60%),
+      radial-gradient(ellipse 70% 50% at 90% 10%, rgba(25,227,214,0.10), transparent 60%),
+      radial-gradient(ellipse 90% 60% at 50% 110%, rgba(255,122,24,0.10), transparent 60%),
+      var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+  .star {
+    position: absolute; width: 2px; height: 2px; border-radius: 50%;
+    background: #fff; opacity: 0.6; animation: twinkle 3s infinite ease-in-out;
+  }
+  @keyframes twinkle { 0%,100%{opacity:0.15;} 50%{opacity:0.8;} }
+
+  .wrap { position: relative; z-index: 1; max-width: 920px; margin: 0 auto; padding: 24px 18px 60px; }
+
+  .header { display: flex; align-items: center; gap: 16px; margin-bottom: 8px; }
+  .kali-mascot img {
+    width: 64px; height: 64px; border-radius: 50%;
+    image-rendering: pixelated;
+    border: 2px solid var(--magenta);
+    box-shadow: 0 0 18px var(--magenta-glow), 0 0 40px var(--teal-glow);
+    animation: float 3.5s ease-in-out infinite;
+  }
+  @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-6px);} }
+  h1 {
+    font-size: 26px; font-weight: 800; letter-spacing: 1px;
+    background: linear-gradient(90deg, var(--orange), var(--magenta) 55%, var(--teal));
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(255,43,214,0.2);
+  }
+  .sub { color: var(--text-dim); font-size: 12px; margin-top: 2px; letter-spacing: 0.5px; }
+
+  .northstar {
+    margin: 22px 0; padding: 18px 20px; border-radius: 16px;
+    background: linear-gradient(135deg, var(--surface), var(--surface2));
+    border: 1px solid var(--border);
+    box-shadow: 0 0 0 1px rgba(255,122,24,0.08), 0 10px 40px rgba(0,0,0,0.5);
+  }
+  .ns-top { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 6px; }
+  .ns-label { font-size: 12px; color: var(--teal); letter-spacing: 2px; text-transform: uppercase; }
+  .ns-nums { font-size: 14px; color: var(--text-dim); }
+  .ns-nums b { color: var(--orange); font-size: 18px; }
+  .bar {
+    margin-top: 12px; height: 16px; border-radius: 10px; overflow: hidden;
+    background: #0a0818; border: 1px solid var(--border); position: relative;
+  }
+  .bar-fill {
+    height: 100%; border-radius: 10px;
+    background: linear-gradient(90deg, var(--orange), var(--magenta) 60%, var(--teal));
+    box-shadow: 0 0 16px var(--magenta-glow);
+    transition: width 1s cubic-bezier(.2,.8,.2,1);
+    position: relative;
+  }
+  .bar-pct { text-align: right; margin-top: 6px; font-size: 12px; color: var(--text-dim); }
+  .bar-pct b { color: var(--teal); }
+
+  .grid-totals { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin: 18px 0; }
+  @media (max-width: 720px) { .grid-totals { grid-template-columns: repeat(2,1fr); } }
+  .tcard {
+    padding: 14px; border-radius: 14px; background: var(--surface);
+    border: 1px solid var(--border); text-align: center;
+  }
+  .tcard .k { font-size: 11px; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; }
+  .tcard .v { font-size: 22px; font-weight: 800; margin-top: 4px; }
+  .v.orange { color: var(--orange); }
+  .v.teal { color: var(--teal); }
+  .v.magenta { color: var(--magenta); }
+
+  .section-title {
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--magenta); margin: 22px 4px 10px; display:flex; align-items:center; gap:8px;
+  }
+  .section-title::after { content:''; flex:1; height:1px; background: linear-gradient(90deg,var(--border),transparent); }
+
+  .pos {
+    padding: 16px 18px; border-radius: 14px; margin-bottom: 12px;
+    background: linear-gradient(135deg, var(--surface), rgba(27,19,64,0.6));
+    border: 1px solid var(--border); position: relative; overflow: hidden;
+  }
+  .pos::before {
+    content:''; position:absolute; left:0; top:0; bottom:0; width:3px;
+    background: linear-gradient(var(--orange), var(--magenta), var(--teal));
+  }
+  .pos.core::before { background: linear-gradient(var(--teal), var(--teal)); }
+  .pos-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+  .ticker { font-size: 20px; font-weight: 800; letter-spacing: 1px; }
+  .ticker .tag {
+    font-size: 10px; padding: 2px 8px; border-radius: 20px; margin-left: 8px; vertical-align: middle;
+    text-transform: uppercase; letter-spacing: 1px; font-weight: 700;
+  }
+  .tag.play { background: rgba(255,43,214,0.15); color: var(--magenta); border:1px solid var(--magenta); }
+  .tag.core { background: rgba(25,227,214,0.12); color: var(--teal); border:1px solid var(--teal); }
+  .pos-name { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
+  .pos-stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-top: 14px; }
+  @media (max-width: 560px) { .pos-stats { grid-template-columns: repeat(2,1fr); } .grid-totals{grid-template-columns:1fr;} }
+  .stat .k { font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
+  .stat .v { font-size: 16px; font-weight: 700; margin-top: 2px; }
+  .gain.up { color: var(--green); }
+  .gain.down { color: var(--red); }
+  .price-live { color: var(--orange); }
+  .note { margin-top: 12px; font-size: 12px; color: var(--text-dim); line-height: 1.5; border-top:1px dashed var(--border); padding-top:10px; }
+  .alert-chip {
+    display:inline-block; margin-top:8px; margin-right:6px; font-size:11px; padding:4px 10px; border-radius:20px;
+    background: rgba(255,122,24,0.12); color: var(--orange); border:1px solid var(--orange);
+  }
+  .alert-chip.hit { background: rgba(25,227,138,0.18); color: var(--green); border-color: var(--green); font-weight:700; }
+  .alert-chip.close { background: rgba(255,214,0,0.15); color: #ffd600; border-color: #ffd600; }
+  .footer { text-align:center; color: var(--text-dim); font-size: 11px; margin-top: 28px; line-height:1.7; }
+  .footer .strat { color: var(--teal); }
+  .footer a { color: var(--magenta); text-decoration: none; }
+  .refresh-btn {
+    background: rgba(25,227,214,0.1); color: var(--teal); border:1px solid var(--teal);
+    padding: 6px 14px; border-radius: 20px; font-size: 12px; cursor: pointer; font-family: inherit;
+    transition: all .2s;
+  }
+  .refresh-btn:hover { background: var(--teal); color: #04121a; box-shadow:0 0 16px var(--teal-glow); }
+  .live-dot { width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block;margin-right:6px;box-shadow:0 0 8px var(--green); animation: pulse 1.5s infinite;}
+  @keyframes pulse { 0%,100%{opacity:1;}50%{opacity:0.3;} }
+  .banner {
+    margin: 14px 0 0; padding: 10px 14px; border-radius: 12px; font-size: 12px;
+    background: rgba(255,122,24,0.08); border: 1px solid rgba(255,122,24,0.3); color: var(--text-dim);
+  }
+  .banner b { color: var(--orange); }
+</style>
+</head>
+<body>
+<div class="stars" id="stars"></div>
+<div class="wrap">
+  <div class="header">
+    <div class="kali-mascot"><img src="kali-avatar.png" alt="Kali"></div>
+    <div>
+      <h1 id="title">MY PORTFOLIO</h1>
+      <div class="sub" id="tagline">// BUILD IN PUBLIC</div>
+    </div>
+  </div>
+
+  <div class="northstar" id="northstar"></div>
+  <div class="grid-totals" id="totals"></div>
+
+  <div class="section-title">Positions <span style="flex:0">·</span>
+    <button class="refresh-btn" id="refreshBtn" onclick="loadPrices()"><span class="live-dot"></span>Refresh Prices</button>
+  </div>
+  <div id="positions"></div>
+
+  <div class="footer" id="footer"></div>
+</div>
+
+<script>
+/* ============================================================================
+   Built with Kali — open-source portfolio dashboard
+   You should NOT need to edit this file. Edit config.json instead.
+   Live prices come from Yahoo Finance's public quote endpoint (no API key).
+   Your holdings live only in your local config.json — nothing is uploaded.
+   ============================================================================ */
+
+let CONFIG = null;
+let livePrices = {};
+
+function fmt(n){ return '$' + Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function fmt0(n){ return '$' + Number(n).toLocaleString('en-US',{maximumFractionDigits:0}); }
+function priceOf(t){ const x=livePrices[t]; return (typeof x==='number')?x:null; }
+
+// starfield
+(function(){
+  const s = document.getElementById('stars');
+  for(let i=0;i<70;i++){
+    const d=document.createElement('div'); d.className='star';
+    d.style.left=Math.random()*100+'%'; d.style.top=Math.random()*100+'%';
+    d.style.animationDelay=(Math.random()*3)+'s';
+    d.style.opacity=Math.random()*0.6+0.1;
+    s.appendChild(d);
+  }
+})();
+
+function renderAlerts(a, lp){
+  if(!a || !a.watch) return '';
+  const tiers = [];
+  if(a.prepNudge)    tiers.push({lvl:a.prepNudge, icon:'🟡', txt:'Prep', note:a.prepNudgeNote});
+  if(a.sellTrigger1) tiers.push({lvl:a.sellTrigger1, icon:'🟢', txt:'Sweep some', note:a.sellTrigger1Note});
+  if(a.sellTrigger2) tiers.push({lvl:a.sellTrigger2, icon:'🔥', txt:'Trim harder', note:a.sellTrigger2Note});
+  if(a.sellTrigger && !a.sellTrigger1) tiers.push({lvl:a.sellTrigger, icon:'🎯', txt:'Sweep', note:a.sellTriggerNote});
+  let chips = tiers.map(t=>{
+    const hit = lp && lp >= t.lvl;
+    const close = lp && !hit && lp >= t.lvl*0.97;
+    const cls = hit ? 'alert-chip hit' : (close ? 'alert-chip close' : 'alert-chip');
+    return `<div class="${cls}">${t.icon} ${t.txt} @ ${fmt(t.lvl)}${t.note?' · '+t.note:''}${hit?' ✅ HIT':''}</div>`;
+  }).join('');
+  if(a.dropTrigger){
+    const hit = lp && lp <= a.dropTrigger;
+    chips += `<div class="${hit?'alert-chip hit':'alert-chip'}" style="${hit?'':'opacity:.85;color:var(--red);border-color:var(--red);background:rgba(255,77,90,.1)'}">🔻 Crash flag @ ${fmt(a.dropTrigger)}${a.dropTriggerNote?' · '+a.dropTriggerNote:''}${hit?' ⚠️ HIT':''}</div>`;
+  }
+  return chips;
+}
+
+function render(){
+  if(!CONFIG) return;
+  const g = CONFIG.goal || {milestone:25000, cash:0};
+
+  document.getElementById('title').textContent = CONFIG.dashboardTitle || 'MY PORTFOLIO';
+  document.getElementById('tagline').textContent = CONFIG.tagline || '';
+
+  let invested=0, value=0, hasLive=true;
+  (CONFIG.positions||[]).forEach(p=>{
+    const inv = (p.costBasis||0) * (p.shares||0);
+    invested += inv;
+    const lp = priceOf(p.ticker);
+    if(!lp) hasLive=false;
+    value += (lp ? lp*p.shares : inv);
+  });
+  const cash = g.cash||0;
+  const gain = value-invested;
+  const nsCurrent = value + cash;
+  const pct = Math.min(100, (nsCurrent/g.milestone)*100);
+
+  document.getElementById('northstar').innerHTML = `
+    <div class="ns-top">
+      <div class="ns-label">🌟 ${g.label||'North Star'} ${hasLive?'<span style="color:var(--green);font-size:10px">● LIVE</span>':''}</div>
+      <div class="ns-nums"><b>${fmt0(nsCurrent)}</b> / ${fmt0(g.milestone)}</div>
+    </div>
+    <div class="bar"><div class="bar-fill" style="width:${pct}%"></div></div>
+    <div class="bar-pct"><b>${pct.toFixed(1)}%</b> to milestone · ${fmt0(Math.max(0,g.milestone-nsCurrent))} to go</div>`;
+
+  const glPctTot = invested ? (gain/invested)*100 : 0;
+  document.getElementById('totals').innerHTML = `
+    <div class="tcard"><div class="k">Invested</div><div class="v orange">${fmt(invested)}</div></div>
+    <div class="tcard"><div class="k">Current Value</div><div class="v teal">${fmt(value)}</div></div>
+    <div class="tcard"><div class="k">Open P/L</div><div class="v" style="color:${gain>=0?'var(--green)':'var(--red)'}">${gain>=0?'+':''}${fmt(gain)}<div style="font-size:11px;font-weight:600">${gain>=0?'+':''}${glPctTot.toFixed(1)}%</div></div></div>
+    <div class="tcard"><div class="k">Cash</div><div class="v orange">${fmt(cash)}</div></div>`;
+
+  const pc = document.getElementById('positions');
+  pc.innerHTML='';
+  (CONFIG.positions||[]).forEach(p=>{
+    const lp = priceOf(p.ticker);
+    const inv = (p.costBasis||0)*(p.shares||0);
+    const cur = lp || p.costBasis;
+    const val = cur*p.shares;
+    const gl = val - inv;
+    const glPct = inv ? (gl/inv)*100 : 0;
+    const up = gl>=0;
+    const isCore = p.type==='core';
+    const div=document.createElement('div');
+    div.className='pos'+(isCore?' core':'');
+    div.innerHTML=`
+      <div class="pos-head">
+        <div>
+          <div class="ticker">${p.ticker}<span class="tag ${isCore?'core':'play'}">${isCore?'CORE':'PLAY'}</span></div>
+          <div class="pos-name">${p.name||''}</div>
+        </div>
+        <div style="text-align:right">
+          <div class="stat"><div class="k">Live Price</div><div class="v price-live">${lp?fmt(lp):'—'}</div></div>
+        </div>
+      </div>
+      <div class="pos-stats">
+        <div class="stat"><div class="k">Shares</div><div class="v">${p.shares}</div></div>
+        <div class="stat"><div class="k">Cost / Share</div><div class="v">${fmt(p.costBasis)}</div></div>
+        <div class="stat"><div class="k">Position Value</div><div class="v">${fmt(val)}</div></div>
+        <div class="stat"><div class="k">Open P/L</div><div class="v gain ${up?'up':'down'}">${up?'+':''}${fmt(gl)} <span style="font-size:11px">(${up?'+':''}${glPct.toFixed(1)}%)</span></div></div>
+      </div>
+      ${renderAlerts(p.alert||{}, lp)}
+      ${p.note?`<div class="note">${p.note}</div>`:''}`;
+    pc.appendChild(div);
+  });
+
+  const strat = CONFIG.strategy||{};
+  document.getElementById('footer').innerHTML = `
+    <div class="strat">CORE: ${strat.core||'VOO'}</div>
+    <div>${strat.philosophy||''}</div>
+    <div style="margin-top:8px">${CONFIG.footerNote||''}</div>`;
+}
+
+// ---- Live prices via the local server (/api/prices) ----
+// serve.py fetches Yahoo Finance server-side and hands back a simple
+// { ok, prices: { TICKER: number } } map. Doing it server-side avoids browser
+// CORS + rate-limit problems entirely, so prices are reliable. The page is
+// still offline-safe: any ticker without a price falls back to its cost basis,
+// so the dashboard never looks broken.
+async function loadPrices(){
+  const btn = document.getElementById('refreshBtn');
+  if(btn){ btn.style.opacity='0.6'; }
+  const symbols = (CONFIG.positions||[]).map(p=>p.ticker).join(',');
+  if(symbols){
+    try{
+      const r = await fetch('/api/prices?symbols=' + encodeURIComponent(symbols), {cache:'no-store'});
+      if(r.ok){
+        const j = await r.json();
+        if(j.ok && j.prices){
+          Object.keys(j.prices).forEach(k=>{ livePrices[k] = j.prices[k]; });
+        }
+      }
+    }catch(e){ /* offline-safe: keep last prices / cost basis */ }
+  }
+  if(btn){ btn.style.opacity='1'; }
+  render();
+}
+
+async function boot(){
+  try{
+    const r = await fetch('config.json', {cache:'no-store'});
+    CONFIG = await r.json();
+  }catch(e){
+    document.getElementById('positions').innerHTML =
+      '<div class="banner">⚠️ Could not load <b>config.json</b>. Make sure it sits next to index.html, and open this page through a local server (see the README) — opening the file directly with file:// blocks the fetch in some browsers.</div>';
+    return;
+  }
+  render();
+  loadPrices();
+  setInterval(loadPrices, 60000); // refresh every 60s
+}
+
+boot();
+</script>
+</body>
+</html>
