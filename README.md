@@ -111,6 +111,29 @@ That's the *next* build. 👀 The live brokerage-sync layer is coming to [@build
 
 ---
 
+## 🤖 Let your AI agent deploy & maintain it
+
+Have an AI coding agent (Claude Code, Cursor, an OpenClaw agent, etc.)? It can run and maintain this tracker for you. Point it at the repo and use prompts like these:
+
+**Deploy it locally**
+> "Clone https://github.com/buildingwithkali/building-with-kali-portfolio, edit `config.json` to hold [your holdings — e.g. 8 shares VOO @ $505, 10 AAPL @ $210], set my North Star goal to $[amount], then start it with `python3 serve.py` and give me the localhost URL."
+
+**Update your holdings after a trade**
+> "In my portfolio tracker's `config.json`, add 3 shares of [TICKER] at $[price], and update my [TICKER] cost basis to $[new avg]. Then restart the server."
+
+**Add a sell alert**
+> "Add a sweep alert to my [TICKER] position: flag it green at $[price1] ('sweep some') and $[price2] ('trim harder'), and a crash flag at $[price3]."
+
+**Host it online (static)**
+> "Deploy this to GitHub Pages / Netlify / Cloudflare Pages as a static site." *(Note: a static host can't run `serve.py`, so live prices need the local server — for a hosted version, ask your agent to swap `/api/prices` for a serverless function or a hosted price API. Keep holdings fake/private on any public URL.)*
+
+**Keep it current on a schedule**
+> "Set up a daily cron/task that pulls my latest holdings from [source] and rewrites `config.json`, then rebuilds the dashboard."
+
+Because the whole tracker is **one config file + one static page + one tiny server**, it's about as agent-friendly as a project gets — there's almost nothing for an agent to break.
+
+---
+
 ## 🐾 Built with Kali
 
 This is a byproduct of building in public with my AI assistant, **Kali**.
